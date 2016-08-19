@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="bootstrap3/css/bootstrap.min.css" />
+</head>
+<body ng-app="">
+	<div class="container" ng-controller="cartController">
+		<table class="table" ng-show="cart.length">
+			<thead>
+				<tr>
+					<th>产品编号</th>
+					<th>产品名字</th>
+					<th>购买数量</th>
+					<th>产品单价</th>
+					<th>产品总价</th>
+					<th>操作</th>
+				</tr>
+			<thead>
+			<tbody>
+				<tr ng-repeat="item in cart">
+					<td>{{item.id}}</td>
+					<td>{{item.name}}</td>
+					<td>
+						<button type="button" ng-click="reduce(item.id)" class="btn btn-primary">-</button>
+						<input type="text" value="{{item.quantity}}" ng-model="item.quantity"/>
+						<button type="button" ng-click="add(item.id)" class="btn btn-primary">+</button>
+					</td>
+					<td>{{item.price}}</td>
+					<td>{{item.price * item.quantity}}</td>
+					<td>
+						<button type="button" ng-click="remove(item.id)" class="btn btn-danger">删除</button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						总购买价  
+						
+					</td>
+					<td>
+						{{totalPrice()}}
+					</td>
+					<td>
+						总购买数量
+					</td>
+					<td>
+						{{totalQuantity()}}
+					</td>
+					<td colspan='2'>
+						<button type="button" ng-click="cart = {}" class="btn btn-danger">清空购物车</button>
+					</td>
+
+				</tr>
+
+				<!-- <p ng-hide="cart.length">购物车已清空</p> -->
+				<p ng-show="!cart.length">购物车已清空</p>
+			</tbody>
+		</table>
+	</div>
+	
+	
+	<script src="shopping_cart.js"></script>
+	<script src="angular-1.2.18/angular.js"></script>
+</body>
+</html>
